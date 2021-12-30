@@ -93,10 +93,10 @@ app.post('/register', async (req, res) =>{
 });
 
 app.post('/login', async (req, res) => {
-  
-    const mailLogin = req.body.mail;
-    const passwordLogin = req.body.password;
-    const userDB = 'SELECT * FROM users WHERE mail = ?';
+    const mailLogin = req.body.mail.replace(/\s+/g, ''); 
+    const passwordLogin = req.body.password.replace(/\s+/g, ''); 
+    if(passwordValidate(passwordLogin) && emailValidate(mailLogin)){
+        const userDB = 'SELECT * FROM users WHERE mail = ?';
 
     await db.query( userDB , [mailLogin], async (err, result) => {
         if(err){
@@ -116,6 +116,10 @@ app.post('/login', async (req, res) => {
         }
        
     });
+    }else{
+        res.send({message: "Error en email o contraseña"});
+    }
+    
 });
 
 app.listen(5000, () => {

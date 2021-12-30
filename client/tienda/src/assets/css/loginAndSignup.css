@@ -1,0 +1,161 @@
+.login {
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.login-inner{
+    position: relative;
+    top: 0%;
+    padding: 32px;
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.login-inner form, .login-inner-Phone form{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+
+.login-inner form p, .login-inner-Phone form p{
+    margin: 0;
+    margin-bottom: 2%;
+    width: 80%;
+    color: #1A1A1A;
+    
+}
+
+
+.login-inner a, label , .login-inner-Phone a, label{
+    text-decoration: none;
+    margin: 3%;
+    font-size: 0.9rem;
+    color: #00b786;
+    cursor: pointer;
+}
+
+
+.login-inner h1, .login-inner-Phone h1{
+    color: #1A1A1A;
+    margin: 2%;;
+}
+
+.login-inner input, .login-inner-Phone input{
+    margin: 2.5%;
+    padding: 1.5%;
+    font-size: 1.1rem;
+    border: 1px solid #1A1A1A;
+    outline: none;
+    width: 70%;
+}
+.login-inner input:focus, .login-inner-Phone input:focus{
+    background: #d6d6d6;
+}
+
+.buttonLogin{
+    font-size: 2rem;
+    padding: 0;
+    background: white;
+    color: #00b786;
+    border: none;
+    outline: none;
+    transition-duration: 0.3s;
+    font-family: 'Spline Sans', sans-serif;
+    
+}
+
+.buttonLogin {
+    width: 30%;
+    margin: 2%;
+    padding: 1.5%;
+}
+
+
+.buttonLogin:hover{
+    color: #078161;
+    cursor: pointer;
+}
+
+.divExitButton{
+    width: 100%;
+    text-align: right;
+}
+
+.exitButton{
+    background: none;
+    color:#d32020;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    transition-duration: 0.3s;
+}
+
+
+.exitButton:hover{
+    cursor: pointer;
+    color:#cd25259d;
+}
+
+
+.login-inner-Phone{
+    margin-top: 10%;
+    width: 100%;
+    background-color: #1A1A1A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+
+}
+
+.noTienesUsuario{
+    color: 1A1A1A;
+}
+
+.noTienesUsuarioDiv{
+    width: 100%;
+    text-align: center;
+}
+
+.invalidLoginTxt{
+    color: #d32020;
+}
+
+.espPassword{
+    color: white;
+}
+
+.espPassword p{
+    margin: 0;
+    margin-left: 10%;
+    text-align: left;
+}
+
+@media screen and (max-width: 1224px) {
+.buttonLogin{
+    width: 50%;
+}
+
+.login-inner-Phone input{
+    width: 80%;
+    height: 25px;
+}
+
+
+  } 
