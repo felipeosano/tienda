@@ -44,7 +44,7 @@
 .login-inner a, label , .login-inner-Phone a, label{
     text-decoration: none;
     margin: 3%;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #00b786;
     cursor: pointer;
 }
@@ -59,12 +59,14 @@
     margin: 2.5%;
     padding: 1.5%;
     font-size: 1.1rem;
-    border: 1px solid #1A1A1A;
+    border: 0;
+    border-bottom: 1px solid #969696;
     outline: none;
     width: 70%;
+    margin: 1rem;
 }
 .login-inner input:focus, .login-inner-Phone input:focus{
-    background: #d6d6d6;
+    border-bottom: 1px solid #000000;
 }
 
 .buttonLogin{
@@ -135,6 +137,8 @@
 
 .invalidLoginTxt{
     color: #d32020;
+    position: absolute;
+    margin-top: 38%;
 }
 
 .espPassword{

@@ -3,14 +3,19 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const MYSQLStore = require('express-mysql-session')(session);
 
 const db = require('./src/database');
 const bcrypt = require('./src/encrypt');
-const inputValidate = require('./src/inputValidate');
 const { nameValidate, passwordValidate, emailValidate } = require('./src/inputValidate');
+const dbKey = require('./src/db');
 
 const app = express();
 
+let sessionStore = new MYSQLStore(dbKey);
+
+
+//config
 
 app.use(express.json());
 app.use(cors({
@@ -25,11 +30,14 @@ app.use(session({
     secret: "hola",
     resave: false,
     saveUninitialized: false,
+    store: sessionStore,
     cookie: {
         expires: 60*60*24 //24hours
     }
 }));
 
+
+//routes
 
 app.get('/login', (req, res) => {
     if(req.session.user){
@@ -122,6 +130,19 @@ app.post('/login', async (req, res) => {
     
 });
 
+
+//server
+
 app.listen(5000, () => {
     console.log("I'm listening");
-})
+});
+
+
+
+function errorHandler (err, req, res, next){
+    if(err){
+        res.send({err: err});
+    }
+}
+
+//app.use(errorHandler); //catches errors and does not crash the server

@@ -21,10 +21,6 @@ export default function Login(props) {
                     <input type="text" placeholder="Email" onChange={(e) => {props.setMail(e.target.value)}}></input>
                     <input type="password" placeholder="Contraseña" onChange={(e) => {props.setPassword(e.target.value)}}></input>
                     <button onClick={props.login}  className='buttonLogin'>Entrar</button>
-                    <div class="form__group field">
-  <input type="input" class="form__field" placeholder="Name" name="name" id='name' required />
-  <label for="name" class="form__label">Name</label>
-</div>
                 </div>
 
                 <div className='noTienesUsuarioDiv'>
