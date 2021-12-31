@@ -2,7 +2,7 @@
 const validate = {};
 
 validate.nameValidate = (name) =>{
-    if(name == ""){
+    if(name === ""){
         return false;
     }
     if(name.length > 35){
@@ -19,7 +19,7 @@ validate.passwordValidate = (password) =>{
 }
 
 validate.emailValidate = (email) => {
-    if(email == ""){
+    if(email === ""){
         return false;
     }
     const validate = /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i;

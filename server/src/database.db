@@ -1,0 +1,41 @@
+use tiendaDataBase;
+
+CREATE TABLE users (
+    username VARCHAR(40) NOT NULL,
+    password VARCHAR(250) NOT NULL,
+    phone VARCHAR(20),
+    email VARCHAR(100) NOT NULL,
+    city VARCHAR(100),
+    address VARCHAR(250),
+    PRIMARY KEY (email)
+);
+
+CREATE TABLE saleType (
+    typeName VARCHAR(100),
+    PRIMARY KEY (name)
+);
+
+CREATE TABLE sale (
+    idSale INT(32) NOT NULL AUTO_INCREMENT,
+    saleName VARCHAR(100) NOT NULL,
+    descriptionSale VARCHAR(500),
+    price INT(6) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    publicDate DATE NOT NULL,
+    buyDate DATE,
+    nameType VARCHAR(100) NOT NULL,
+    emailUserPublic VARCHAR(100) NOT NULL,
+    emailUserBuy VARCHAR(100),
+    PRIMARY KEY (idSale),
+    CONSTRAINT fk_nameType FOREIGN KEY (nameType) REFERENCES saleType(nameType),
+    CONSTRAINT fk_emailUserPublic FOREIGN KEY (emailUserPublic) REFERENCES users(email),
+    CONSTRAINT fk_emailUserBuy FOREIGN KEY (emailUserBuy) REFERENCES users(email)
+
+);
+
+CREATE TABLE photo (
+    photoName VARCHAR(150) NOT NULL,
+    idSale INT(32) NOT NULL,
+    PRIMARY KEY (photoName),
+    CONSTRAINT fk_idSale FOREIGN KEY (idSale) REFERENCES sale(idSale)
+);

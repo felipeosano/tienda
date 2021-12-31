@@ -24,24 +24,19 @@
     
 }
 
-.login-inner form, .login-inner-Phone form{
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    align-items: center;
-    width: 80%;
-}
-
-.login-inner form p, .login-inner-Phone form p{
-    margin: 0;
-    margin-bottom: 2%;
-    width: 80%;
-    color: #1A1A1A;
-    
+.errorInputRed{
+    margin: 2.5%;
+    padding: 1.5%;
+    font-size: 1.1rem;
+    border: 0;
+    border-bottom: 1px solid #ff0000;
+    outline: none;
+    width: 70%;
+    margin: 1rem;
 }
 
 
-.login-inner a, label , .login-inner-Phone a, label{
+.login-inner a , .login-inner-Phone a, .labelButton{
     text-decoration: none;
     margin: 3%;
     font-size: 1rem;
@@ -55,7 +50,7 @@
     margin: 2%;;
 }
 
-.login-inner input, .login-inner-Phone input{
+.inputF{
     margin: 2.5%;
     padding: 1.5%;
     font-size: 1.1rem;
@@ -65,7 +60,7 @@
     width: 70%;
     margin: 1rem;
 }
-.login-inner input:focus, .login-inner-Phone input:focus{
+.inputF:focus{
     border-bottom: 1px solid #000000;
 }
 
@@ -117,7 +112,7 @@
 .login-inner-Phone{
     margin-top: 10%;
     width: 100%;
-    background-color: #1A1A1A;
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -127,7 +122,7 @@
 }
 
 .noTienesUsuario{
-    color: 1A1A1A;
+    color: #1A1A1A;
 }
 
 .noTienesUsuarioDiv{
@@ -142,13 +137,26 @@
 }
 
 .espPassword{
-    color: white;
+    color: #525252;
+    font-size: 0.8rem;
 }
 
 .espPassword p{
     margin: 0;
-    margin-left: 10%;
+    margin-left: 14%;
     text-align: left;
+}
+
+.messageIncorrectoInput{
+    position: absolute;
+    margin-top: 5%;
+    color: #d32020;
+}
+
+.MailRegistred{
+    position: absolute;
+    margin-top: 53%;
+    color: #d32020;
 }
 
 @media screen and (max-width: 1224px) {
@@ -156,10 +164,6 @@
     width: 50%;
 }
 
-.login-inner-Phone input{
-    width: 80%;
-    height: 25px;
-}
 
 
   } 

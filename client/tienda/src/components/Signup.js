@@ -18,22 +18,24 @@ export default function Signup(props) {
                          </div> 
                          <h1>Hola bienvenido!</h1>
                          <div className="register">
-                            <input placeholder='Nombre' type="text" onChange={(e) => {props.setUsernameReg(e.target.value)}}/>
-                            <input placeholder='Apellido' type="text" onChange={(e) => {props.setLastNameReg(e.target.value)}}/>
-                            <input placeholder='Contraseña'  type="password" onChange={(e) => {props.setPasswordReg(e.target.value)}}/>
+                            <input placeholder='Nombre y Apellido' type="text" className={props.errorNameSignup ? 'errorInputRed' : 'inputF'} onChange={(e) => {props.setUsernameReg(e.target.value)}}/>
+                            <label className='messageIncorrectoInput'>{props.errorNameSignup ? 'Incorrecto' : null}</label>
+                            <input placeholder='Contraseña'  type="password" className={props.errorPasswordSignup ? 'errorInputRed' : 'inputF'} onChange={(e) => {props.setPasswordReg(e.target.value)}}/>
+                            <label className='messageIncorrectoInput'>{props.errorPasswordSignup ? 'Incorrecto' : null}</label>
                             <div className='espPassword'>
-                                <p>Contraseña:</p><br/>
-                                <p>-Entre 6 y 16 caracteres</p><br/>
-                                <p>-Un numero o mas</p><br/>
-                                <p>-Un carater especial o mas (!@#$%)</p><br/>
+                            <p>Contraseña de mas de 6 caracteres</p>
                             </div>
-                            <input placeholder='Mail' type="text" onChange={(e) => {props.setMailReg(e.target.value)}}/>
-                            <input placeholder='Telefono' type="text" onChange={(e) => {props.setPhoneReg(e.target.value)}}/>
+                            <input placeholder='Email' type="text" className={props.errorEmailSignup ? 'errorInputRed' : 'inputF'} onChange={(e) => {props.setMailReg(e.target.value)}}/>
+                            <label className='messageIncorrectoInput'>{props.errorEmailSignup ? 'Incorrecto' : null}</label>
+                            
                             <button onClick={props.register} className='buttonLogin'>Registrarme</button>
+                            
+                            
                         </div>
                          <div className='noTienesUsuarioDiv'>
-                            <p className='noTienesUsuario'>¿Ya tienes usuario?,<label onClick={() => props.setViewSignup(1)}> Iniciar Sesion</label></p>
+                            <p className='noTienesUsuario'>¿Ya tienes usuario?,<label className='labelButton' onClick={() => props.setViewSignup(1)}> Iniciar Sesion</label></p>
                         </div>
+                        <p className='MailRegistred'>{props.errorEmailRegistred}</p>
                     </div>
                 </div>
             }
@@ -41,22 +43,16 @@ export default function Signup(props) {
                 <div className='login-inner-Phone'>
                     <h1>Hola bienvenido!</h1>
                     <div className="register">
-                            <input placeholder='Nombre' type="text" onChange={(e) => {props.setUsernameReg(e.target.value)}}/>
-                            <input placeholder='Apellido' type="text" onChange={(e) => {props.setLastNameReg(e.target.value)}}/>
-                            <input placeholder='Contraseña'  type="password" onChange={(e) => {props.setPasswordReg(e.target.value)}}/>
+                            <input placeholder='Nombre y Apellido' type="text" className='inputF' onChange={(e) => {props.setUsernameReg(e.target.value)}}/>
+                            <input placeholder='Contraseña'  type="password" className='inputF' onChange={(e) => {props.setPasswordReg(e.target.value)}}/>
                             <div className='espPassword'>
-                                <p>Contraseña:</p><br/>
-                                <p>-Entre 6 y 16 caracteres</p><br/>
-                                <p>-Un numero o mas</p><br/>
-                                <p>-Un carater especial o mas (!@#$%)</p><br/>
+                            <p>Contraseña de mas de 6 caracteres</p>
                             </div>
-                            
-                            <input placeholder='Mail' type="text" onChange={(e) => {props.setMailReg(e.target.value)}}/>
-                            <input placeholder='Telefono' type="text" onChange={(e) => {props.setPhoneReg(e.target.value)}}/>
+                            <input placeholder='Email' type="text" className='inputF' onChange={(e) => {props.setMailReg(e.target.value)}}/>
                             <button onClick={props.register} className='buttonLogin'>Registrarme</button>
                         </div>
                     <div className='noTienesUsuarioDiv'>
-                        <p className='noTienesUsuario'>¿Ya tienes usuario?,<label onClick={() => props.setViewSignup(1)}> Iniciar Sesion</label></p>
+                        <p className='noTienesUsuario'>¿Ya tienes usuario?,<label  className='labelButton' onClick={() => props.setViewSignup(1)}> Iniciar Sesion</label></p>
                     </div>
                 </div>
             }

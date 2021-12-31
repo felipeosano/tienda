@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MYSQLStore = require('express-mysql-session')(session);
+const passport = require('passport');
+
 
 const db = require('./src/database');
 const bcrypt = require('./src/encrypt');
@@ -32,7 +34,7 @@ app.use(session({
     saveUninitialized: false,
     store: sessionStore,
     cookie: {
-        expires: 60*60*24 //24hours
+        expires: 1000*60*60*24 //24hours
     }
 }));
 
@@ -52,36 +54,30 @@ app.get('/logout', async (req, res) => {
 });
 
 app.post('/register', async (req, res) =>{
-    const nameWithoutSpaces = req.body.username.replace(/\s+/g, '');
-    const lastnameWithoutSpaces = req.body.lastname.replace(/\s+/g, ''); 
-    const passwordWithoutSpaces = req.body.password.replace(/\s+/g, ''); 
+    if(!req.session.user){
     const mailWithoutSpaces = req.body.mail.replace(/\s+/g, ''); 
-    const phoneWithoutSpaces = req.body.username.replace(/\s+/g, '');
-    if(nameValidate(nameWithoutSpaces) && nameValidate(lastnameWithoutSpaces) && passwordValidate(passwordWithoutSpaces) && emailValidate(mailWithoutSpaces)){
+    if(nameValidate(req.body.username)  && passwordValidate(req.body.password) && emailValidate(mailWithoutSpaces)){
         const pass = await bcrypt.encryptPassword(req.body.password);
         const newUser = {
             username: req.body.username,
-            lastname: req.body.lastname,
             password: pass,
-            mail: req.body.mail,
-            phone: req.body.phone
+            mail: mailWithoutSpaces,
         }
-        const mailLogin = req.body.mail;
-        const passwordLogin = req.body.password;
     
         const insertUser = 'INSERT INTO users SET ?';
-    
+        
         await db.query(insertUser, [newUser], async (err, result) => {
             if(err){
-                res.send({message: "Error al registrar el usuario"});
+                res.send({message: "Email ya registrado"});
+
             }else{
-                const userDB = 'SELECT * FROM users WHERE mail = ?';
-                await db.query( userDB , [mailLogin], async (err, result) => {
+                const serchUser = 'SELECT * FROM users WHERE mail = ?';
+                await db.query( serchUser , [mailWithoutSpaces], async (err, result) => {
                     if(err){
                         res.send({err: err});
                     }
                     if(result.length > 0){
-                        const resultPassword = await bcrypt.matchPassword(passwordLogin, result[0].password);
+                        const resultPassword = await bcrypt.matchPassword(req.body.password, result[0].password);
                         if(resultPassword){
                             req.session.user = result;
                             res.send(result);
@@ -97,37 +93,40 @@ app.post('/register', async (req, res) =>{
             }
         });
     }
+}
     
 });
 
-app.post('/login', async (req, res) => {
-    const mailLogin = req.body.mail.replace(/\s+/g, ''); 
-    const passwordLogin = req.body.password.replace(/\s+/g, ''); 
-    if(passwordValidate(passwordLogin) && emailValidate(mailLogin)){
-        const userDB = 'SELECT * FROM users WHERE mail = ?';
 
-    await db.query( userDB , [mailLogin], async (err, result) => {
-        if(err){
-            res.send({err: err});
-        }
-        if(result.length > 0){
-            const resultPassword = await bcrypt.matchPassword(passwordLogin, result[0].password);
-            if(resultPassword){
-                req.session.user = result;
-                res.send(result);
-                
-            }else{
-                res.send({message: "Contraseña incorrecta"});
-            }
-        }else{
-             res.send({message: "Mail no registrado"});
-        }
-       
-    });
-    }else{
-        res.send({message: "Error en email o contraseña"});
-    }
+app.post('/login', async (req, res) => {
+    if(!req.session.user){
+        const mailLogin = req.body.mail.replace(/\s+/g, ''); 
+        const passwordLogin = req.body.password.replace(/\s+/g, ''); 
+        if(passwordValidate(passwordLogin) && emailValidate(mailLogin)){
+            const userDB = 'SELECT * FROM users WHERE mail = ?';
     
+        await db.query( userDB , [mailLogin], async (err, result) => {
+            if(err){
+                res.send({err: err});
+            }
+            if(result.length > 0){
+                const resultPassword = await bcrypt.matchPassword(passwordLogin, result[0].password);
+                if(resultPassword){
+                    req.session.user = result;
+                    res.send(result);
+                    
+                }else{
+                    res.send({message: "Error en email o contraseña"});
+                }
+            }else{
+                 res.send({message: "Error en email o contraseña"});
+            }
+           
+        });
+        }else{
+            res.send({message: "Error en email o contraseña"});
+        }
+    }
 });
 
 

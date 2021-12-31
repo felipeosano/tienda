@@ -18,13 +18,13 @@ export default function Login(props) {
                 </div>
                 <h1>Hola!, Ingresa</h1>
                 <div>
-                    <input type="text" placeholder="Email" onChange={(e) => {props.setMail(e.target.value)}}></input>
-                    <input type="password" placeholder="Contraseña" onChange={(e) => {props.setPassword(e.target.value)}}></input>
+                    <input type="text" placeholder="Email" className='inputF' onChange={(e) => {props.setMail(e.target.value)}}></input>
+                    <input type="password" placeholder="Contraseña" className='inputF' onChange={(e) => {props.setPassword(e.target.value)}}></input>
                     <button onClick={props.login}  className='buttonLogin'>Entrar</button>
                 </div>
 
                 <div className='noTienesUsuarioDiv'>
-                        <p className='noTienesUsuario'>¿No tienes usuario?,<label onClick={() => props.setViewLogin(2)}> Registrate</label></p>
+                        <p className='noTienesUsuario'>¿No tienes usuario?,<label className='labelButton'  onClick={() => props.setViewLogin(2)}> Registrate</label></p>
                     </div>
                     <a href='/'>¿Olvidaste el usuario o la contraseña?</a>
                     <p className='invalidLoginTxt'>{props.message}</p>
@@ -35,12 +35,12 @@ export default function Login(props) {
             <div className='login-inner-Phone'>
                 <h1>Hola!, Ingresa</h1>
                 <div>
-                    <input type="text" placeholder="Email" onChange={(e) => {props.setMail(e.target.value)}}></input>
-                    <input type="password" placeholder="Contraseña" onChange={(e) => {props.setPassword(e.target.value)}}></input>
+                    <input type="text" placeholder="Email" className='inputF' onChange={(e) => {props.setMail(e.target.value)}}></input>
+                    <input type="password" placeholder="Contraseña" className='inputF' onChange={(e) => {props.setPassword(e.target.value)}}></input>
                     <button onClick={props.login}  className='buttonLogin'>Entrar</button>
                 </div>
                 <div className='noTienesUsuarioDiv'>
-                    <p className='noTienesUsuario'>¿No tienes usuario?,<label onClick={() => props.setViewLogin(2)}>Registrate</label></p>
+                    <p className='noTienesUsuario'>¿No tienes usuario?,<label  className='labelButton' onClick={() => props.setViewLogin(2)}>Registrate</label></p>
                 </div>
                 <a href='/'>¿Olvidaste el usuario o la contraseña?</a>
                 <p className='invalidLoginTxt'>{props.message}</p>
