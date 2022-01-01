@@ -17,7 +17,7 @@ export default function Signup(props) {
                             <button className='exitButton' onClick={() => props.setViewSignup(0)}>Cerrar</button>
                          </div> 
                          <h1>Hola bienvenido!</h1>
-                         <div className="register">
+                         <form onSubmit={props.register} className="register">
                             <input placeholder='Nombre y Apellido' type="text" className={props.errorNameSignup ? 'errorInputRed' : 'inputF'} onChange={(e) => {props.setUsernameReg(e.target.value)}}/>
                             <label className='messageIncorrectoInput'>{props.errorNameSignup ? 'Incorrecto' : null}</label>
                             <input placeholder='Contraseña'  type="password" className={props.errorPasswordSignup ? 'errorInputRed' : 'inputF'} onChange={(e) => {props.setPasswordReg(e.target.value)}}/>
@@ -27,11 +27,10 @@ export default function Signup(props) {
                             </div>
                             <input placeholder='Email' type="text" className={props.errorEmailSignup ? 'errorInputRed' : 'inputF'} onChange={(e) => {props.setMailReg(e.target.value)}}/>
                             <label className='messageIncorrectoInput'>{props.errorEmailSignup ? 'Incorrecto' : null}</label>
+                            <button type='submit' className='buttonLogin'>Registrarme</button>
                             
-                            <button onClick={props.register} className='buttonLogin'>Registrarme</button>
                             
-                            
-                        </div>
+                        </form>
                          <div className='noTienesUsuarioDiv'>
                             <p className='noTienesUsuario'>¿Ya tienes usuario?,<label className='labelButton' onClick={() => props.setViewSignup(1)}> Iniciar Sesion</label></p>
                         </div>
@@ -42,18 +41,19 @@ export default function Signup(props) {
             {isTabletOrMobile &&
                 <div className='login-inner-Phone'>
                     <h1>Hola bienvenido!</h1>
-                    <div className="register">
-                            <input placeholder='Nombre y Apellido' type="text" className='inputF' onChange={(e) => {props.setUsernameReg(e.target.value)}}/>
-                            <input placeholder='Contraseña'  type="password" className='inputF' onChange={(e) => {props.setPasswordReg(e.target.value)}}/>
+                    <form onSubmit={props.register} className="register">
+                            <input placeholder='Nombre y Apellido' type="text" className={props.errorNameSignup ? 'errorInputRed' : 'inputF'} onChange={(e) => {props.setUsernameReg(e.target.value)}}/>
+                            <input placeholder='Contraseña'  type="password" className={props.errorPasswordSignup ? 'errorInputRed' : 'inputF'} onChange={(e) => {props.setPasswordReg(e.target.value)}}/>
                             <div className='espPassword'>
                             <p>Contraseña de mas de 6 caracteres</p>
                             </div>
-                            <input placeholder='Email' type="text" className='inputF' onChange={(e) => {props.setMailReg(e.target.value)}}/>
-                            <button onClick={props.register} className='buttonLogin'>Registrarme</button>
-                        </div>
+                            <input placeholder='Email' type="text" className={props.errorEmailSignup ? 'errorInputRed' : 'inputF'} onChange={(e) => {props.setMailReg(e.target.value)}}/>
+                            <button className='buttonLogin'>Registrarme</button>
+                    </form>
                     <div className='noTienesUsuarioDiv'>
                         <p className='noTienesUsuario'>¿Ya tienes usuario?,<label  className='labelButton' onClick={() => props.setViewSignup(1)}> Iniciar Sesion</label></p>
                     </div>
+                    <p>{props.errorEmailRegistred}</p>
                 </div>
             }
         </div>

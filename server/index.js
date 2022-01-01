@@ -55,13 +55,13 @@ app.get('/logout', async (req, res) => {
 
 app.post('/register', async (req, res) =>{
     if(!req.session.user){
-    const mailWithoutSpaces = req.body.mail.replace(/\s+/g, ''); 
-    if(nameValidate(req.body.username)  && passwordValidate(req.body.password) && emailValidate(mailWithoutSpaces)){
+    const emailWithoutSpaces = req.body.mail.replace(/\s+/g, ''); 
+    if(nameValidate(req.body.username)  && passwordValidate(req.body.password) && emailValidate(emailWithoutSpaces)){
         const pass = await bcrypt.encryptPassword(req.body.password);
         const newUser = {
             username: req.body.username,
             password: pass,
-            mail: mailWithoutSpaces,
+            mail: emailWithoutSpaces,
         }
     
         const insertUser = 'INSERT INTO users SET ?';
@@ -72,7 +72,7 @@ app.post('/register', async (req, res) =>{
 
             }else{
                 const serchUser = 'SELECT * FROM users WHERE mail = ?';
-                await db.query( serchUser , [mailWithoutSpaces], async (err, result) => {
+                await db.query( serchUser , [emailWithoutSpaces], async (err, result) => {
                     if(err){
                         res.send({err: err});
                     }

@@ -28,7 +28,7 @@ function App() {
 
   Axios.defaults.withCredentials = true;
 
-  const register = () => {
+  const register = (e) => {
     if(!nameValidate(usernameReg)){
       setErrorNameSignup(true);
     }else{
@@ -44,7 +44,6 @@ function App() {
     }else{
       setErrorEmailSignup(false);
     }
-    console.log(errorPasswordSignup);
     if(!errorNameSignup && !errorPasswordSignup && !errorEmailSignup){
       Axios.post('http://localhost:5000/register', {
         username: usernameReg,
@@ -54,6 +53,7 @@ function App() {
         if(response.data.message){
           setEmailRegistred(response.data.message);
         }else{
+          console.log(response.data[0].username);
           setLoginStatus(response.data[0].username);
           setnotViewLoggedIn(false);
           setViewLoggedIn(true);
@@ -61,9 +61,10 @@ function App() {
         }
       });
     }
+    e.preventDefault();
   }
 
-  const login = () => {
+  const login = (e) => {
     Axios.post('http://localhost:5000/login', {
       mail: mail,
       password: password
@@ -78,6 +79,7 @@ function App() {
 
       }
     });
+    e.preventDefault();
   }
 
   const logout = () => {
@@ -103,7 +105,7 @@ function App() {
 
   return (
     <div className="App">
-      {viewLoggedIn ? null : <button onClick={logout}>Logout</button>}
+      {viewLoggedIn ? null : <button onClick={logout}>Salir</button>}
       {isDesktopOrLaptop && 
       <div>
         <header className="App-header">
@@ -111,11 +113,13 @@ function App() {
             <button className="title"  onClick={() => setView(0)}>FastVentas</button>
             {notViewLoggedIn && 
               <div>
-                <button className={'btnHeader btnHeader-desktop'} onClick={() => setView(1)}>Ingresar</button>
+                <button className='btnHeader btnHeader-desktop' onClick={() => setView(1)}>Ingresar</button>
                 <button  className='btnHeader btnHeader-desktop' onClick={() => setView(2)}>Registrarme</button>
+                
               </div>
             }
-            
+            {loginStatus}
+            <button className='btnHeader btnHeader-desktop' onClick={() => setView(1)}>Vender</button>
             
           </div>
         </header>
@@ -138,7 +142,6 @@ function App() {
         setPasswordReg={setPasswordReg} 
         setMailReg={setMailReg} 
         register={register}/> : null}
-        {loginStatus}
         </div>
       }
       {isTabletOrMobile && 
