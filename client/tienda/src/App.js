@@ -4,8 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive'
 import Login from './components/Login';
 import Signup from './components/Signup';
-import Main from './components/Main';
+import Main from './routes/Main';
+import Sale from './routes/Sale'
 import { nameValidate, passwordValidate, emailValidate } from './inputValidate';
+import { BrowserRouter, Routes, Route, useHref } from 'react-router-dom';
+
 
 function App() {
 
@@ -119,11 +122,16 @@ function App() {
               </div>
             }
             {loginStatus}
-            <button className='btnHeader btnHeader-desktop' onClick={() => setView(1)}>Vender</button>
-            
+            {viewLoggedIn ? null : <a href='/sale'>Vender</a>}
           </div>
         </header>
-        <Main/>
+        <BrowserRouter>
+        <Routes>
+            <Route exact path="/" element={<Main/>}/>
+            <Route exact path="/sale" element={<Sale/>}/>
+        </Routes>
+        </BrowserRouter>
+        
         {view === 1 ? <Login  
         message={message} 
         setViewLogin={setView} 
@@ -169,9 +177,14 @@ function App() {
               }
               </ul>
             </nav>
-
+              
           </header>
-          {view === 0 ? <Main/> : null}
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/" element={<Main/>}/>
+            
+          </Routes>
+        </BrowserRouter>
         {view === 1 ? <Login setViewLogin={setView} setMail={setMail} setPassword={setPassword} login={login} loginStatus={loginStatus} /> : null}
         {view === 2 ? <Signup setViewSignup={setView} setUsernameReg={setUsernameReg}  setPasswordReg={setPasswordReg} setMailReg={setMailReg} register={register} /> : null}
         {loginStatus}
