@@ -1,0 +1,110 @@
+body{
+    background: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    
+}
+
+.App-header {
+  background-color: #ffffff;
+  display: flex;
+  color: #489499;
+  width: 100%;
+}
+
+.title{
+    font-size: 2.5em;
+    margin-right: 2em;
+    color: #489499;
+    text-decoration: none;
+    background: none;
+    border: none;
+}
+
+.divHeader{
+    display: flex;
+    margin-left: 2em;
+    padding: 0.7em;
+    align-items: center;
+}
+
+.btnHeader{
+    color: #489499;
+    text-decoration: none;
+    background: none;
+    border: none;
+    transition-duration: 0.3s;
+}
+
+.btnHeader-desktop{
+    margin-left: 1em;
+    font-size: 1rem;
+}
+
+.btnHeader:hover{
+    color: #00b786;
+    cursor: pointer;
+}
+
+/*-------------Phone resposive header------*/ 
+
+nav{
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+}
+
+
+.bar-btn{
+    font-size: 25px;
+    color: #489499;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.nav-menu-Phone{
+    position: fixed;
+    width: 100%;
+    height: 0;
+    top: 70px;
+    background: rgba(0, 0, 0);
+    text-align: center;
+    transition: all 0.4s;
+    list-style: none;
+}
+
+ul{
+    margin:0;
+    padding: 0;
+}
+
+.nav-menu-Phone li {
+    display: none;
+    line-height: 30px;
+    margin: 50px 0;
+    transition: all 0.4s;
+}
+
+.nav-menu-Phone li button{
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+#check{
+    display: none;
+}
+
+#check:checked ~ .nav-menu-Phone {
+    height: 100vh;
+}
+
+#check:checked ~ .nav-menu-Phone li {
+    display: block;
+}
+
+
+
+
+/*------------- END Phone resposive header------*/ 
